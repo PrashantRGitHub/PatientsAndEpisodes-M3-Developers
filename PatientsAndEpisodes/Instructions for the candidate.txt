@@ -1,0 +1,27 @@
+This solution contains an ASP.NET MVC API project. The API contains a single controller which has a single endpoint (action method).
+
+The endpoint can be accessed using the following URL...
+
+http://{your binding}/patients/{patientId}/episodes
+
+...where {your binding} is whatever binding you specify if you set the API up as a project in IIS, and {patientId} is an integer.
+
+You can alternatively run the project by hitting the F5 key, which will open a temporary URL similar to http://localhost:{port number}/ in a browser for you. However, in order to access the endpoint, you'll need to modify the URL by suffixing patients/{patientId}/episodes and reload the page.
+
+(Note: the zip file does not contain the NuGet packages and therefore may not build for you. You will need to perform a NuGet package restore. If you're unsure about this, Google should help!)
+
+However, the endpoint is not yet implemented. If you call it, it just throws a NotImplementedException!
+
+You will notice that the project contains a class called PatientContext. This class, which implements the interface IDatabaseContext, is an Entity Framework 6 data context class which contains all the functionality required to load data about patients and episodes from a SQL Server database running in Azure.
+
+Your first task is to implement the endpoint described above using the EF6 data context. When the endpoint is called, it should return details of the patient whose ID is specified in the query string, plus any episodes they have.
+
+So for example, if a client requests patients/1/episodes, the endpoint should return details of the patient with PatientId 1, along with their episodes.
+
+If you're unaware of how ASP.NET Web API works, the action method simply needs to return an instance of the Patient class and the Web API framework will automagically serialize it to JSON (or possibly XML) and return it to the client for you.
+
+Your second task is to write a unit test. The unit test should get an instance of the controller, call the action method and verify that the correct patient is returned. I've left this a little vague as there are a number of approaches to doing this. You may find it helpful to note that the interface IDatabaseContext has more than one implementation.
+
+Please write code of a quality you think is appropriate in a professional context, but resist the temptation to do any refactorings not relevant to the specific task. Make a note of any additional changes you would have made given more time.
+
+Create a github repository that contains your work 
